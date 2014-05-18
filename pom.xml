@@ -58,6 +58,45 @@
 					</dependency>
 				</dependencies>
 			</plugin>
+			<plugin>
+				<groupId>de.codecentric</groupId>
+				<artifactId>jmeter-graph-maven-plugin</artifactId>
+				<version>0.1.0</version>
+				<configuration>
+					<inputFile>${project.build.directory}/jmeter/results/Login_100 Users.jtl</inputFile>
+					<graphs>
+						<graph>
+							<pluginType>ThreadsStateOverTime</pluginType>
+							<width>800</width>
+							<height>600</height>
+							<outputFile>${project.build.directory}/jmeter/ImgReports/Login_100_Users_ThreadsStateOverTime.jtl.png</outputFile>
+						</graph>
+						
+						<!-- ... you can declare more <graph>-elements here -->
+					</graphs>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>com.lazerycode.jmeter</groupId>
+				<artifactId>jmeter-analysis-maven-plugin</artifactId>
+				<version>1.0.4</version>
+				<configuration>
+					<source>${project.build.directory}/jmeter/results/Login_100 Users.jtl</source>
+				</configuration>
+				<executions>
+					<execution>
+						<id>create-html-report</id>
+						<phase>verify</phase>
+						<goals>
+							<goal>analyze</goal>
+						</goals>
+						<configuration>
+							<targetDirectory>${project.build.directory}/html_reports</targetDirectory>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+
 		</plugins>
 	</build>
 </project>
